@@ -1,0 +1,19 @@
+<%- include('layout') %>
+
+<form action="/add" method="POST">
+  <input type="text" name="title" placeholder="Task Title" required />
+  <input type="date" name="dueDate" required />
+  <button type="submit">Add Task</button>
+</form>
+
+<ul>
+  <% tasks.forEach(task => { %>
+  <li>
+    <strong><%= task.title %></strong> - Due: <%= task.dueDate.toDateString() %>
+    <% if (!task.completed) { %>
+    <a href="/complete/<%= task._id %>">Mark Complete</a>
+    <% } else { %> ✅ Completed <% } %>
+    <a href="/delete/<%= task._id %>">🗑 Delete</a>
+  </li>
+  <% }) %>
+</ul>
